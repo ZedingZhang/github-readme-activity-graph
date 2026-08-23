@@ -23,24 +23,24 @@ describe('Utilities Test', () => {
         return app;
     };
 
-    describe('GET /graph with correct credential', () => {
+    describe('GET /graph for an unsupported username', () => {
         test('responding', (done) => {
             const app = fakeServer();
             app.get('/graph', handlers.getGraph);
             request(app)
                 .get('/graph?username=ashutosh00710')
                 .expect('Content-Type', 'image/svg+xml; charset=utf-8')
-                .expect('Cache-Control', 'public, max-age=1800')
-                .expect(200, done);
+                .expect('Cache-Control', 'no-store, max-age=0')
+                .expect(404, done);
         });
     });
 
-    describe('GET /graph with incorrect credential', () => {
+    describe('GET /graph without an API credential', () => {
         test('responding', (done) => {
             const app = fakeServer();
             app.get('/graph', handlers.getGraph);
             request(app)
-                .get('/graph?username=')
+                .get('/graph?username=ZedingZhang')
                 .expect('Content-Type', 'image/svg+xml; charset=utf-8')
                 .expect('Cache-Control', 'no-store, max-age=0')
                 .expect(200, done);

@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import * as dotenv from 'dotenv';
 import moment from 'moment';
 import { Query, UserDetails, Week, ContributionDay, ResponseOfApi } from 'src/interfaces/interface';
+import { getGitHubApiToken } from './githubApp';
 
 dotenv.config();
 
@@ -39,11 +40,14 @@ export class Fetcher {
     }
 
     private async fetch(graphQLQuery: Query): Promise<AxiosResponse<ResponseOfApi>> {
+        const token = await getGitHubApiToken();
+
         return axios({
             url: 'https://api.github.com/graphql',
             method: 'POST',
             headers: {
-                Authorization: `bearer ${process.env.TOKEN}`,
+                Authorization: `Bearer ${token}`,
+                'User-Agent': 'ZedingZhang-github-activity-graph',
             },
             data: graphQLQuery,
         });
@@ -117,7 +121,8 @@ export class Fetcher {
                 throw new Error('Unexpected API response structure');
             }
         } catch (error) {
-            console.log('error: ', error);
+            const message = error instanceof Error ? error.message : 'Unknown error';
+            console.error(`GitHub contribution fetch failed: ${message}`);
             return `Can't fetch any contribution. Please check your username 😬`;
         }
     }

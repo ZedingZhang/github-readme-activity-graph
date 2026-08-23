@@ -14,8 +14,6 @@ app.get('/', handlers.getRoot);
 //Get Graph
 app.get('/graph', handlers.getGraph);
 
-app.get('/data', handlers.getData);
-
 app.listen(port, (): void => {
     console.log(`Server is Running on Port ${port}`);
 });
