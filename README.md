@@ -4,6 +4,9 @@
 
 <h1 align="center">Github Readme Activity Graph</h1>
 
+> [!NOTE]
+> This fork powers [ZedingZhang's profile activity graph](https://zeding-github-activity-graph.vercel.app/graph?theme=light). It is intentionally restricted to `ZedingZhang`, exposes fixed light and dark themes, and authenticates with short-lived GitHub App installation tokens instead of a personal access token. See the [upstream project](https://github.com/Ashutosh00710/github-readme-activity-graph) for the general-purpose version.
+
 <a href="https://jb.gg/OpenSourceSupport">
 <p align="center">
     <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" height="150">
